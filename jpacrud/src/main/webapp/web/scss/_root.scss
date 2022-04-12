@@ -1,0 +1,50 @@
+@import "base/colors&font";
+@import "base/globalStyles";
+
+@import "components/sidebar";
+@import "components/card";
+@import "components/carousel";
+
+@import "pages/premium";
+@import "pages/subscriptions";
+@import "pages/payment";
+@import "pages/uploadVideo";
+@import "pages/createAccount";
+@import "pages/pageManagement";
+@import "pages/watch&read";
+@import "pages/homepage";
+@import "pages/thankYou";
+
+@mixin heading-font($color) {
+  font-family: $font-family-secondary;
+  color: $color;
+}
+body {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @include heading-font($primary);
+  letter-spacing: -0.5px;
+}
+h6 {
+  @include heading-font($secondary);
+}
+
+main {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  @include margin-left(0px);
+}
+.main-active {
+  @include margin-left($sidebar-width);
+}
+
+

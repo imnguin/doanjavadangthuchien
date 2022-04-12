@@ -1,0 +1,76 @@
+@use 'base/globalStyles'as *;
+
+#header-img {
+  background: url("/assets/images/1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+  position: relative;
+  @include margin-top(-250px);
+  @include max-width("md") {
+    @include margin-top(0px);
+    height: 30vh;
+  }
+  .header-avatar {
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    @include justify-content(center);
+    @include max-width("md") {
+      top: 60%;
+    }
+
+    img {
+      width: 150px;
+      object-fit: cover;
+    }
+  }
+}
+
+#page-management {
+  @include margin-top($h2-font-size);
+
+  h4,
+  p {
+    @include text-center;
+  }
+
+  .social-group {
+    @include justify-content(center);
+
+    .icon {
+      background-color: $primary;
+      border-radius: 50%;
+      @include text-white;
+      @include margin-left(5px);
+      @include margin-right(5px);
+
+      .facebook,
+      .instagram {
+        padding: $h6-font-size;
+      }
+    }
+  }
+
+  .nav {
+    @include justify-content(center);
+    @include margin-top(5vh);
+
+    .active {
+      padding-bottom: $h6-font-size;
+      border-bottom: 1px solid $primary;
+    }
+
+    .nav-item {
+      @include margin-left(15px);
+      @include margin-right(15px);
+    }
+  }
+
+  .card-setting {
+    position: absolute;
+    width: 60px;
+    top: 10px;
+    right: 0;
+  }
+}

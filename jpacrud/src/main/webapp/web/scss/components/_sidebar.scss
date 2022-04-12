@@ -1,0 +1,90 @@
+@use 'base/globalStyles'as *;
+
+.sidebar {
+  height: 100vh;
+  width: 0;
+  z-index: 2;
+  position: fixed;
+  overflow-x: hidden;
+  top: 0;
+  left: 0;
+  box-shadow: 0 15px 25px 0 rgba($gray-900, 0.75);
+  background-color: $white;
+  .btn-close {
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
+
+  &-content {
+    display: block;
+    padding: 70px 40px;
+
+    .login {
+      @include margin-top(100px);
+    }
+
+    select {
+      font-size: $font-size-base;
+      @include margin-top($h4-font-size);
+      @include margin-bottom($h6-font-size);
+    }
+
+    .list-group {
+      .line-bottom {
+        border-bottom: 2px solid $secondary;
+        @include margin-right(90px);
+      }
+
+      .line-top {
+        border-top: 2px solid $secondary;
+        @include margin-right(90px);
+      }
+
+      &-item {
+        font-size: $font-size-base;
+        text-transform: uppercase;
+        border: none;
+        padding: 10px 0px;
+        @include margin-top($h6-font-size);
+        @include margin-bottom($h6-font-size);
+
+        a {
+          text-decoration: none;
+          color: $secondary;
+
+          span {
+            @include margin-left($h6-font-size);
+          }
+
+          .text-premium {
+            color: $primary;
+            font-weight: border;
+          }
+        }
+      }
+
+      .social-network {
+        display: flex;
+        justify-content: start;
+
+        .icon {
+          @include text-muted;
+          @include margin-left(5px);
+          @include margin-right(5px);
+          background-color: $primary;
+          border-radius: 50%;
+
+          .facebook,
+          .instagram {
+            padding: $h6-font-size;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebar-active {
+  width: $sidebar-width;
+}

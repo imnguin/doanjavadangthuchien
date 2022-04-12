@@ -1,0 +1,42 @@
+@use 'base/globalStyles'as *;
+
+#create-account {
+  @include margin-top($h2-font-size * 2);
+
+  .btn-group {
+    @include text-center;
+
+    .btn {
+      @include margin-left(5px);
+      @include margin-right(5px);
+    }
+  }
+
+  p {
+    @include text-center;
+  }
+
+  h3 {
+    color: $secondary;
+    @include text-center;
+    @include margin-top($h2-font-size);
+    @include margin-bottom($h4-font-size);
+  }
+
+  form {
+    @include justify-content(center);
+
+    label {
+      font-weight: bolder;
+    }
+
+    .form-center {
+      width: 40%;
+      @include margin-left($h4-font-size);
+      @include margin-right($h4-font-size);
+      @include max-width("lg") {
+        width: 100%;
+      }
+    }
+  }
+}

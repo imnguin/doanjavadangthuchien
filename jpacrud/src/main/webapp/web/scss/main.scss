@@ -1,0 +1,37 @@
+// My variable overrides
+@import "base/colors&font";
+$badge-padding-y: 10px;
+$badge-padding-x: 40px;
+$badge-pill-padding-x: 40px;
+$input-btn-padding-x: 1.5rem;
+$input-btn-padding-y: 0.6rem;
+$input-btn-padding-x-lg: 3.5rem;
+$input-btn-padding-y-lg: 0.8rem;
+$input-btn-padding-x-sm: 1rem;
+
+// Bootstrap and its required default variables
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+$input-border-color: $gray-800;
+$card-border-color: $white;
+$input-group-addon-bg: $gray-800;
+$input-group-addon-color: $gray-100;
+$input-group-addon-border-color: $gray-800;
+
+// Optional import
+@import "node_modules/bootstrap/scss/buttons";
+@import "node_modules/bootstrap/scss/card";
+@import "node_modules/bootstrap/scss/badge";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/list-group";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/root";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/nav";
+@import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/input-group";
+@import "node_modules/bootstrap/scss/carousel";
+@import "root";
+
+$theme-colors: map-remove($theme-colors, "info");

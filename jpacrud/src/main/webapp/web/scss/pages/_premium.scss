@@ -1,0 +1,76 @@
+@use 'base/globalStyles'as *;
+
+#premium {
+  @include margin-top($h1-font-size * 2);
+
+  h3 {
+    @include text-center;
+    @include margin-bottom($h6-font-size);
+  }
+
+  h5 {
+    font-family: $font-family-base;
+    @include text-center;
+    @include text-muted;
+  }
+
+  .options {
+    @include margin-top($h1-font-size);
+    @include justify-content(center);
+
+    @media screen and (max-width: 720px) {
+      flex-direction: column;
+    }
+
+    .card {
+      min-width: $h4-font-size * 10;
+      margin: 10px 15px;
+      border: none;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+
+      .card-body {
+        h6 {
+          font-family: $font-family-base;
+          font-weight: bolder;
+          font-size: $font-size-base * 0.8;
+          @include text-white;
+        }
+
+        h2 {
+          font-family: $font-family-base;
+          padding-top: $h2-font-size;
+          padding-bottom: $h2-font-size;
+          @include text-center;
+
+          sub {
+            font-size: $h5-font-size;
+          }
+        }
+
+        .list-group {
+          .list-group-item {
+            border: none;
+            border-bottom: 1px solid $gray-200;
+            padding: 20px 5px;
+            display: flex;
+            justify-content: space-between;
+            @include text-muted;
+
+            b {
+              font-weight: bolder;
+              color: $dark;
+            }
+          }
+
+          .border-none {
+            border: none;
+          }
+        }
+      }
+
+      a {
+        border-radius: 0 0 5px 5px;
+      }
+    }
+  }
+}
