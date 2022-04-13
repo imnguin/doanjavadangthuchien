@@ -13,7 +13,7 @@
 		</form>
 		
 		<ul class="list-group">
-			<li class="list-group-item"><a href="/btphantrang/trang-chu"><span>Trang chủ</span>
+			<li class="list-group-item"><a href="${pageContext.request.contextPath}"><span>Trang chủ</span>
 			</a></li>
 			<li class="list-group-item"><a href="danh-muc/tat-ca"><span>Manga</span>
 			</a></li>

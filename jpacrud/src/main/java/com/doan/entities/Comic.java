@@ -14,6 +14,8 @@ public class Comic {
 	private Long id;
 	@Column(name = "Name")
 	private String name;
+	@Column(name = "Thumbnail")
+	private String thumbnail;
 	@Column(name = "Status")
 	private int status;
 	
@@ -31,6 +33,14 @@ public class Comic {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public int getStatus() {

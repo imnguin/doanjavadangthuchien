@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/layouts/user/taglib.jsp"%>
-<title>Trang chủ</title>
 <body>
 	<section id="watch-read-1" class="container-fluid row">
 		<div class="col-md-6 offset-md-3">
@@ -18,18 +17,14 @@
 				<button class="btn btn-link showmore-btn">Read More...</button>
 			</div>
 			<div class="chapter-control">
-				<a href="#" id="btn3"> <img class="card-img"
-					src="<c:url value="/web/assets/chevrons-left.svg"/>" alt="backward">
-				</a> <select class="form-control">
-					<option disabled>Chương</option>
-					<option value="chap1">Chương 1</option>
-					<option value="chap2">Chương 2</option>
-				</select> <a href="#"> <img class="card-img"
-					src="<c:url value="/web/assets/chevrons-right.svg"/>" alt="forward">
-				</a>
+				<select class="form-control" id="chap">
+				<c:forEach var="chap" items="${listchap}">
+					<option value="${chap.name }">${chap.name }</option>
+				</c:forEach>
+				</select>
 			</div>
 			<div class="btn-centered">
-				<div class="btn btn-dark">Watch Now</div>
+				<div class="btn btn-dark" id="xem">Xem ngay</div>
 			</div>
 			<section class="read">
 				<c:forEach var="comic" items="${comicchapter}">
@@ -41,18 +36,15 @@
 				</c:forEach>
 			</section>
 			<div class="chapter-control">
-				<a href="#"> <img class="card-img"
-					src="<c:url value="/web/assets/chevrons-left.svg"/>" alt="backward">
-				</a> <select class="form-control">
-					<option disabled>Chương</option>
-					<option value="chap1">Chương 1</option>
-					<option value="chap2">Chương 2</option>
-				</select> <a href="#"> <img class="card-img"
-					src="<c:url value="/web/assets/chevrons-right.svg"/>" alt="forward">
-				</a>
+				<select class="form-control" id="chap">
+				<c:forEach var="chap" items="${listchap}">
+					<option disabled> Bạn đang đọc ${chapter}</option>
+					<option value="${chap.name }">${chap.name }</option>
+				</c:forEach>
+				</select>
 			</div>
 			<div class="btn-centered">
-				<div class="btn btn-dark">Watch Now</div>
+				<div class="btn btn-dark" id="xem">Xem ngay</div>
 			</div>
 		</div>
 	</section>
@@ -120,23 +112,12 @@
 			</section>
 		</div>
 	</section>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 	<script type="text/javascript">
-		$('#btn3').click(function() {
-			$.ajax({
-				type: "GET",
-				headers: { 
-			        Accept : "application/json; charset=utf-8",
-			        "Content-Type": "application/json; charset=utf-8"
-			    },
-			    url: '${pageContext.request.contextPath}/dshs',
-			    success: function(result){
-			    	console.log(result);
-				}, 
-				error:function(data,status,er) { 
-			        alert('lỗi');
-			    }
-			});
+		$('#xem').click(function() {
+			var chap = $("#chap").val();
+			window.location.href = "${pageContext.request.contextPath}/truyen?id=${idcomic}&name="+chap;
 		});
 	</script>
 </body>

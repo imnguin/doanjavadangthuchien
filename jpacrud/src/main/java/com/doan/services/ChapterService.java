@@ -32,5 +32,10 @@ public class ChapterService {
     
     public List<Chapter> getByNameAndNameComic(Long idcomic, String name) {
     	List<Chapter> abc = repochap.findByNameAndNameComic(idcomic, name);
-    	return abc ; }
+    	return abc ;
+    }
+    
+    public List<Chapter> getAllChapByIdcomic(Long idcomic){
+    	return (List<Chapter>) repochap.findChapByIdcomic(idcomic);
+    }
 }
