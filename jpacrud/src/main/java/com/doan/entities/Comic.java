@@ -2,9 +2,12 @@ package com.doan.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "comic")
@@ -18,6 +21,10 @@ public class Comic {
 	private String thumbnail;
 	@Column(name = "Status")
 	private int status;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idcategory")
+    private Category idcategory;
 	
 	public Long getId() {
 		return id;
@@ -51,4 +58,12 @@ public class Comic {
 		this.status = status;
 	}
 
+	public Category getIdcategory() {
+		return idcategory;
+	}
+
+	public void setIdcategory(Category idcategory) {
+		this.idcategory = idcategory;
+	}
+	
 }

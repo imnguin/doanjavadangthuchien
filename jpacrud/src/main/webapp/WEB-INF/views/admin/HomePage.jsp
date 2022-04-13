@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/layouts/user/taglib.jsp"%>
-<title>Trang chủ</title>
 <body>
 	<div class="main-content">
 		<div class="section__content section__content--p30">
@@ -85,64 +84,6 @@
 								</div>
 								<div class="overview-chart">
 									<canvas id="widgetChart4"></canvas>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="au-card recent-report">
-							<div class="au-card-inner">
-								<h3 class="title-2">recent reports</h3>
-								<div class="chart-info">
-									<div class="chart-info__left">
-										<div class="chart-note">
-											<span class="dot dot--blue"></span> <span>products</span>
-										</div>
-										<div class="chart-note mr-0">
-											<span class="dot dot--green"></span> <span>services</span>
-										</div>
-									</div>
-									<div class="chart-info__right">
-										<div class="chart-statis">
-											<span class="index incre"> <i
-												class="zmdi zmdi-long-arrow-up"></i>25%
-											</span> <span class="label">products</span>
-										</div>
-										<div class="chart-statis mr-0">
-											<span class="index decre"> <i
-												class="zmdi zmdi-long-arrow-down"></i>10%
-											</span> <span class="label">services</span>
-										</div>
-									</div>
-								</div>
-								<div class="recent-report__chart">
-									<canvas id="recent-rep-chart"></canvas>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="au-card chart-percent-card">
-							<div class="au-card-inner">
-								<h3 class="title-2 tm-b-5">char by %</h3>
-								<div class="row no-gutters">
-									<div class="col-xl-6">
-										<div class="chart-note-wrap">
-											<div class="chart-note mr-0 d-block">
-												<span class="dot dot--blue"></span> <span>products</span>
-											</div>
-											<div class="chart-note mr-0 d-block">
-												<span class="dot dot--red"></span> <span>services</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-xl-6">
-										<div class="percent-chart">
-											<canvas id="percent-chart"></canvas>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -560,25 +501,27 @@
               <div class="bg-image promo-img mr-3" style="background-image: url('images/img_1.jpg');">
               </div>
               <div class="content-text p-4">
-                <h3>Thêm danh mục truyện tranh</h3>
+                <h3>THÊM TRUYỆN</h3>
                 <p></p>
-                <form action="#">
+                <form>
                   <div class="form-group">
                     <label for="country">Thể loại</label>
-                    <!-- <input type="email" class="form-control" id="email"> -->
-                    
-                      <select id="country" name="country" class="custom-select">
-                <option value="Afghanistan">Hành động Gag manga Siêu anh hùng</option>
+                      <select id="theloai" name="theloai" class="custom-select">
+                		<c:forEach var="danhmuc" items="${dsdanhmuc}">
+							<option value="${danhmuc.name }">${danhmuc.name }</option>
+						</c:forEach>
                       </select>
-                    </form>
                   </div>
                   <div class="form-group">
-                    <label for="fname">Tên thể loại</label>
-                    <input type="text" class="form-control" id="fname" placeholder="Full Name">
+                    <label for="fname">Tên truyện</label>
+                    <input type="text" class="form-control" id="fname" placeholder="Nhập tên">
                   </div>
                   <div class="form-group">
                     <label for="name">Trạng thái</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    <select id="trangthai" name="trangthai" class="custom-select">
+                		<option value="1">Hiển thị</option>
+                		<option value="0">Không kiển thị</option>
+                      </select>
                   </div>
                   
                   <div class="form-group row mb-4">
@@ -586,15 +529,11 @@
                         <label for="mm">Chọn ảnh</label>
                       </div>
                       <div class="col-md-4">
-                        <input type="file" id="fileupload" name="fileupload" multiple>
+                        <input type="file" id="files" multiple>
                       </div>
                   </div>
-                  
                   <div class="form-group">
-                    <input type="submit" value="Sign up" class="btn btn-primary btn-block">
-                  </div>
-                  <div class="form-group ">
-                    <p class="custom-note"><small>By signing up you will agree to our <a href="#">Privacy Policy</a></small></p>
+                    <input id="uploadButton" type="button" value="Lưu" class="btn btn-primary btn-block" />
                   </div>
                 </form>
               </div>
@@ -603,4 +542,88 @@
         </div>
       </div>
     </div>
+    <script>
+		var totalFileLength, totalUploaded, fileCount, filesUploaded;
+		//To log everything on console
+		function debug(s) {
+			var debug = document.getElementById('debug');
+		}
+		//Will be called when upload is completed
+		function onUploadComplete(e) {
+			totalUploaded += document.getElementById('files').files[filesUploaded].size;
+			filesUploaded++;
+			debug('complete ' + filesUploaded + " of " + fileCount);
+			debug('totalUploaded: ' + totalUploaded);
+			if (filesUploaded < fileCount) {
+				uploadNext();
+			} else {
+				var bar = document.getElementById('bar');
+				bar.style.width = '100%';
+				bar.innerHTML = '100% complete';
+				alert('Finished uploading file(s)');
+			}
+		}
+	
+		//Will be called when user select the files in file control
+		function onFileSelect(e) {
+			var files = e.target.files; // FileList object
+			var output = [];
+			fileCount = files.length;
+			totalFileLength = 0;
+			for (var i = 0; i < fileCount; i++) {
+				var file = files[i];
+				totalFileLength += file.size;
+			}
+			document.getElementById('selectedFiles').innerHTML = output.join('');
+			debug('totalFileLength:' + totalFileLength);
+		}
+	
+		//This will continueously update the progress bar
+		function onUploadProgress(e) {
+			if (e.lengthComputable) {
+				var percentComplete = parseInt((e.loaded + totalUploaded) * 100
+						/ totalFileLength);
+				var bar = document.getElementById('bar');
+				bar.style.width = percentComplete + '%';
+				bar.innerHTML = percentComplete + ' % complete';
+			} else {
+				debug('unable to compute');
+			}
+		}
+	
+		//the Ouchhh !! moments will be captured here
+		function onUploadFailed(e) {
+			alert("Error uploading file");
+		}
+	
+		//Pick the next file in queue and upload it to remote server
+		function uploadNext() {
+			var xhr = new XMLHttpRequest();
+			var fd = new FormData();
+			var file = document.getElementById('files').files[filesUploaded];
+			var name = document.getElementById('fname');
+			fd.append("name", name);
+			fd.append("multipartFile", file);
+			xhr.upload.addEventListener("progress", onUploadProgress, false);
+			xhr.addEventListener("load", onUploadComplete, false);
+			xhr.addEventListener("error", onUploadFailed, false);
+			xhr.open("POST", "AddComic");
+			debug('uploading ' + file.name);
+			xhr.send(fd);
+		}
+	
+		//Let's begin the upload process
+		function startUpload() {
+			totalUploaded = filesUploaded = 0;
+			uploadNext();
+		}
+	
+		//Event listeners for button clicks
+		window.onload = function() {
+			document.getElementById('files').addEventListener('change',
+					onFileSelect, false);
+			document.getElementById('uploadButton').addEventListener('click',
+					startUpload, false);
+		}
+	</script>
 </body>
